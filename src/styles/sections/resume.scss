@@ -1,7 +1,7 @@
 .rd-resume {
-    background-color: $resumeBGColor;
-    padding: 25px;
+    padding: 40px 25px 25px;
     position: relative;
+    transition: background-color 0.5s ease;
 }
 
 .rd-resume-job {
@@ -14,10 +14,11 @@
 }
 
 .rd-resume-company--aka {
-    color: $lightText;
     @include font-size(14);
+    color: var(--light-text);
     font-weight: normal;
     font-style: italic;
+    transition: color 0.5s ease;
 }
 
 .rd-resume-job-title {
@@ -50,8 +51,14 @@
 .rd-resume-skills-item {
     @include font-size(16);
     display: block;
+    font-weight: 700;
     line-height: 1.2;
     margin-bottom: 5px;
+}
+
+.rd-resume-skill-description {
+    font-weight: 400;
+    font-style: italic;
 }
 
 .rd-resume-contact-name {
@@ -62,12 +69,13 @@
 }
 
 .rd-resume-highlight {
-    border-left: 2px solid $link-color;
-    color: $link-color;
+    border-left: 2px solid var(--link-color);
+    color: var(--link-color);
     display: inline-block;
     line-height: 1.1;
     margin-left: 4px;
     padding-left: 5px;
+    transition: border-color 0.5s ease, color 0.5s ease;
 }
 
 .rd-resume-contact-list {
@@ -75,12 +83,14 @@
 }
 
 .rd-resume-contact-info {
-    margin: 0 0 8px;
+    margin: 0 0 5px;
 }
 
 .rd-resume-contact-link {
-    color: $bodyFontColor;
+    color: var(--body-text);
     height: 30px;
+    line-height: 24px;
+    transition: color 0.5s ease;
     vertical-align: middle;
 }
 
@@ -92,27 +102,27 @@
     width: 20px;
 
     &-email {
-        content: url('/img/icons/email.svg');
+        content: var(--email-image);
     }
 
     &-phone {
-        content: url('/img/icons/phone.svg');
+        content: var(--phone-image);
     }
 
     &-web {
-        content: url('/img/icons/web.svg');
+        content: var(--web-image);
     }
 
     &-github {
-        content: url('/img/icons/github.svg');
+        content: var(--github-image);
     }
 
     &-linkedin {
-        content: url('/img/icons/linkedin.svg');
+        content: var(--linkedin-image);
     }
 
     &-twitter {
-        content: url('/img/icons/twitter.svg');
+        content: var(--twitter-image);
     }
 }
 
@@ -138,7 +148,34 @@
 }
 
 @media print {
+    .rd-resume-icon {
+        &-email {
+            content: url('/img/icons/email.svg');
+        }
+
+        &-phone {
+            content: url('/img/icons/phone.svg');
+        }
+
+        &-web {
+            content: url('/img/icons/web.svg');
+        }
+
+        &-github {
+            content: url('/img/icons/github.svg');
+        }
+
+        &-linkedin {
+            content: url('/img/icons/linkedin.svg');
+        }
+
+        &-twitter {
+            content: url('/img/icons/twitter.svg');
+        }
+    }
+
     .rd-resume {
+        color: $charcoal;
         padding: 0;
     }
 

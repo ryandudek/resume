@@ -1,18 +1,30 @@
 .rd-about {
     box-sizing: border-box;
     box-shadow: 2px 7px 30px rgba(0, 0, 0, 0.75) inset;
-    background-color: $aboutBGColor;
-    color: $aboutFontColor;
-    margin-top: -60px;
-    padding: 60px 0 50px;
+    background-color: var(--about-bg);
+    color: var(--about-text);
+    margin-top: -160px;
+    overflow: hidden;
+    padding: 160px 0 50px;
     position: relative;
+    transition: background-color 0.5s ease, color 0.5s ease;
     z-index: 10;
 
-    a {
-        color: $aboutLinkColor;
-        font-family: inherit;
-        text-decoration: underline;
-        text-shadow: 1px 0px 5px $aboutLinkShadow;
+    &:after {
+        bottom: -20px;
+        background: linear-gradient(
+            1.5deg,
+            rgba($black, 0.9) 0%,
+            rgba($black, 0.8) 10%,
+            rgba($black, 0) 70%
+        );
+        content: '';
+        display: block;
+        height: 50px;
+        left: -30%;
+        position: absolute;
+        right: -30%;
+        z-index: 2;
     }
 }
 
@@ -20,9 +32,9 @@
     margin: 0 auto;
     max-width: 64em;
     padding: 0 25px;
-    z-index: 10;
 }
 
+.rd-img-container,
 .rd-about-image {
     display: none;
 }
@@ -36,7 +48,7 @@
 	z-index: -1;
 
 	&:after {
-		background: $aboutBGColor url('/img/bg/overlay.png') repeat 0 0;
+		background: var(--about-bg) url('/img/bg/overlay.png') repeat 0 0;
 		bottom: 0;
 		content: "";
 		display: block;
@@ -46,22 +58,20 @@
 		position: absolute;
 		right: 0;
 		top: 0;
+        transition: background-color 0.5s ease;
 		width: 100%;
 		z-index: 1;
   }
 }
 
-@media screen and (min-width: 40em) {
-    .rd-about {
-        margin-top: -100px;
-        padding-top: 100px;
-    }
-}
-
 @media screen and (min-width: 48em) {
     .rd-about {
         box-shadow: 2px 7px 65px rgba(0, 0, 0, 0.75) inset;
-        height: 100vh;
+        min-height: 100vh;
+
+        &:after {
+            height: 120px;
+        }
     }
 
     .rd-about-container {
@@ -78,18 +88,38 @@
         @include font-size(21);
     }
 
-    .rd-about-image {
+    .rd-img-container {
         bottom: 0;
         display: block;
-        max-width: 100%;
+        height: 100vh;
+        left: 50%;
+        max-width: 64em;
         position: absolute;
-        width: 27.5%;
+        transform: translateX(-50%);
+        width: 100%;
+        z-index: -1;
+    }
+
+    .rd-about-image {
+        animation: revealImage 0.666s ease-in-out;
+        bottom: 0;
+        display: block;
+        filter: drop-shadow(4px -3px 9px rgba($black, 0.75)), blur(0.2px);
+        height: 80vh;
+	    left: auto;
+        margin-left: 33%;
+        opacity: 1;
+        position: absolute;
+        transform: translateX(-420px);
+        width: auto;
+        z-index: -1;
     }
 
     .rd-about-content {
         display: block;
         margin-left: 40%;
         width: 60%;
+        z-index: 10;
     }
 }
 
@@ -110,9 +140,14 @@
 @media print {
     .rd-about {
         box-shadow: none;
+        color: $charcoal;
         margin: -10px 0 0;
         padding: 0;
         position: static;
+
+        a {
+            color: $charcoal;
+        }
     }
 
     .rd-about-container {
@@ -127,4 +162,19 @@
     .rd-about-text {
         @include font-size(14);
     }
+}
+
+@keyframes revealImage {
+  0%   {
+      height: 81vh;
+      filter: drop-shadow(8px -4px 12px rgba($black, 0.95)), blur(1.3px);
+      transform: translateX(-400px);
+      opacity: 0.5;
+  }
+  100% {
+      height: 80vh;
+      filter: drop-shadow(4px -3px 9px rgba($black, 0.75)), blur(0.2px);
+      transform: translateX(-420px);
+      opacity: 1;
+  }
 }
